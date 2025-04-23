@@ -37,3 +37,9 @@ jobs:
         run: |
           docker build -t ghcr.io/lobothedark/tbp-frontend:latest .
           docker push ghcr.io/lobothedark/tbp-frontend:latest
+
+      - name: Inspect build output
+        run: ls -la ./dist/tbp-frontend
+        
+      - name: Docker build
+        run: docker build . -t ghcr.io/<user>/tbp-frontend:latest
