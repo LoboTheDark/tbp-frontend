@@ -18,6 +18,7 @@ import { Router } from '@angular/router'; // <-- Import Router (optional, for na
 })
 export class AuthComponent {
   registrationForm: FormGroup;
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -42,11 +43,11 @@ export class AuthComponent {
        this.authService.register(this.registrationForm.value).subscribe(
          response => {
            console.log('Registrierung erfolgreich', response);
-           // Weiterleitung oder Erfolgsmeldung
+           this.router.navigate(['/register']);
          },
          error => {
            console.error('Registrierung fehlgeschlagen', error);
-           // Fehlermeldung anzeigen
+           this.handleError(error);
          }
        );
 
@@ -55,6 +56,16 @@ export class AuthComponent {
       // Optional: Feedback an den Benutzer geben
        this.registrationForm.markAllAsTouched(); // Alle Felder als berührt markieren, um Validierungsfehler anzuzeigen
     }
+  }
+
+  private handleError(error: any) {
+    if (error.status === 400 && error.error?.message) {
+    this.errorMessage = error.error.message;
+  } else if (error.status === 409) {
+    this.errorMessage = 'Benutzername oder E-Mail bereits vergeben.';
+  } else {
+    this.errorMessage = 'Ein unbekannter Fehler ist aufgetreten.';
+  }
   }
 
 }
