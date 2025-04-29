@@ -1,5 +1,6 @@
 // src/environments/environment.prod.ts
 export const environment = {
     production: true, // Indicates this is a production environment
-    registerUserUrl: 'https://dein-produktions-backend.com/api'
+    registerUserUrl: 'http://tbp-auth/api/auth/users/register',
+    loginUrl: 'http://tbp-auth/api/auth/login'
   };
