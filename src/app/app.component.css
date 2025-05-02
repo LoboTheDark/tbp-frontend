@@ -1,4 +1,22 @@
-.example-spacer {
-    flex: 1 1 auto;
-  }
-  
+/* Add these rules to your app.component.css */
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+/* Add some spacing between toolbar icons */
+mat-toolbar button {
+  margin-left: 8px;
+}
+
+/* This ensures the theme toggle is properly aligned with other icons */
+app-theme-toggle {
+  display: flex;
+  align-items: center;
+}
