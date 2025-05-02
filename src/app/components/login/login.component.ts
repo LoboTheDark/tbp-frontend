@@ -3,12 +3,20 @@ import { CommonModule } from '@angular/common'; // Für *ngIf etc.
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; // ODER Import für Reactive Forms
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-login',
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule, 
+    MatButtonModule,
+    MatFormFieldModule, 
+    MatInputModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -34,10 +42,11 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe({
       next: (res) => {
         this.authService.saveToken(res.token);
-        this.router.navigate(['/home']);
+        console.log("Login successfull!");
+        //this.router.navigate(['/home']);
       },
       error: () => {
-        this.errorMessage = 'Login fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.';
+        this.errorMessage = 'Login failed. Please check your credentials!';
       }
     });
   }
