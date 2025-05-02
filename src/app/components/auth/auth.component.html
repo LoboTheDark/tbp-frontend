@@ -1,46 +1,40 @@
-<h2>Registrieren</h2>
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="max-width: 400px; margin: 40px auto; display: flex; flex-direction: column; gap: 16px;">
+  <h2>Registrierung</h2>
+  <mat-form-field appearance="outline">
+    <mat-label>Benutzername</mat-label>
+    <input matInput id="username" formControlName="username" />
+    <mat-error *ngIf="registrationForm.get('username')?.errors?.['required']">
+      Benutzername ist erforderlich.
+    </mat-error>
+  </mat-form-field>
 
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="username">Benutzername:</label><br>
-    <input type="text" id="username" formControlName="username">
-    <div *ngIf="registrationForm.get('username')?.invalid && (registrationForm.get('username')?.dirty || registrationForm.get('username')?.touched)">
-        <div *ngIf="registrationForm.get('username')?.errors?.['required']">
-            Benutzername ist erforderlich.
-        </div>
-    </div>
-  </div>
-  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>E-Mail</mat-label>
+    <input matInput type="email" id="email" formControlName="email" />
+    <mat-error *ngIf="registrationForm.get('email')?.errors?.['required']">
+      E-Mail ist erforderlich.
+    </mat-error>
+    <mat-error *ngIf="registrationForm.get('email')?.errors?.['email']">
+      Bitte geben Sie eine gültige E-Mail-Adresse ein.
+    </mat-error>
+  </mat-form-field>
 
-  <div>
-    <label for="email">E-Mail:</label><br>
-    <input type="email" id="email" formControlName="email">
-     <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)">
-        <div *ngIf="registrationForm.get('email')?.errors?.['required']">
-            E-Mail ist erforderlich.
-        </div>
-        <div *ngIf="registrationForm.get('email')?.errors?.['email']">
-            Bitte geben Sie eine gültige E-Mail-Adresse ein.
-        </div>
-    </div>
-  </div>
-  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Passwort</mat-label>
+    <input matInput type="password" id="password" formControlName="password" />
+    <mat-error *ngIf="registrationForm.get('password')?.errors?.['required']">
+      Passwort ist erforderlich.
+    </mat-error>
+    <mat-error *ngIf="registrationForm.get('password')?.errors?.['minlength']">
+      Passwort muss mindestens 8 Zeichen lang sein.
+    </mat-error>
+  </mat-form-field>
 
-  <div>
-    <label for="password">Passwort:</label><br>
-    <input type="password" id="password" formControlName="password">
-     <div *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)">
-        <div *ngIf="registrationForm.get('password')?.errors?.['required']">
-            Passwort ist erforderlich.
-        </div>
-         <div *ngIf="registrationForm.get('password')?.errors?.['minlength']">
-            Passwort muss mindestens 8 Zeichen lang sein.
-        </div>
-    </div>
-  </div>
-  <br>
-  <div *ngIf="errorMessage" class="error-message">
+  <div *ngIf="errorMessage" class="error-message" style="color: red;">
     {{ errorMessage }}
   </div>
-  <button type="submit" [disabled]="registrationForm.invalid">Registrieren</button>
+
+  <button type="submit" [disabled]="registrationForm.invalid" mat-raised-button color="primary">
+    Registrieren
+  </button>
 </form>
