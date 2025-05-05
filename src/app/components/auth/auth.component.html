@@ -30,6 +30,17 @@
     </mat-error>
   </mat-form-field>
 
+  <mat-form-field appearance="outline">
+    <mat-label>SteamId</mat-label>
+    <input matInput id="steamId" formControlName="steamId" />
+    <mat-error *ngIf="registrationForm.get('steamId')?.errors?.['required']">
+      SteamId ist erforderlich.
+    </mat-error>
+    <mat-error *ngIf="registrationForm.get('steamId')?.errors?.['minlength']">
+      SteamId muss mindestens 17 Zeichen lang sein.
+    </mat-error>    
+  </mat-form-field>
+
   <div *ngIf="errorMessage" class="error-message" style="color: red;">
     {{ errorMessage }}
   </div>

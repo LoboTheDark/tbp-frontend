@@ -30,20 +30,20 @@ export class AuthComponent {
     private fb: FormBuilder,
     private authService: AuthService, // <-- Inject AuthService
     private router: Router // <-- Inject Router (optional)
-  ) { // <-- FormBuilder Service injizieren
-    // Formularstruktur in der Komponente definieren
+  ) {
+    
     this.registrationForm = this.fb.group({
-      username: ['', Validators.required], // FormControl für Username, mit 'required' Validator
-      email: ['', [Validators.required, Validators.email]], // FormControl für Email, mit 'required' und 'email' Validatoren
-      password: ['', [Validators.required, Validators.minLength(8)]] // FormControl für Password, mit 'required' und 'minlength' Validatoren
+      username: ['', Validators.required], 
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      steamId: ['', [Validators.required, Validators.minLength(17)]]
     });
   }
-
-  // Methode, die beim Absenden des Formulars aufgerufen wird
+  
   onSubmit() {
-    // Überprüfen, ob das Formular gültig ist
+    
     if (this.registrationForm.valid) {
-      console.log('Registrierungsdaten:', this.registrationForm.value); // <-- Daten aus dem FormGroup holen
+      console.log('Registrierungsdaten:', this.registrationForm.value); 
 
        this.authService.register(this.registrationForm.value).subscribe(
          response => {
@@ -58,7 +58,7 @@ export class AuthComponent {
        );
 
     } else {
-      console.log('Formular ist ungültig');
+      console.log('Form is invalid');
        this.registrationForm.markAllAsTouched();
     }
   }
