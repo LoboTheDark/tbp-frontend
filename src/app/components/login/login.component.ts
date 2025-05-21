@@ -42,8 +42,9 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe({
       next: (res) => {
         this.authService.saveToken(res.token);
+        this.authService.saveSteamId(res.steamId);
         console.log("Login successfull!");
-        //this.router.navigate(['/home']);
+        this.router.navigate(['/home', res.steamId]);
       },
       error: () => {
         this.errorMessage = 'Login failed. Please check your credentials!';
