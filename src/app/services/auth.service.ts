@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   private readonly TOKEN_KEY = 'token';
+  private readonly STEAM_ID_KEY = 'steamId';
 
 
   // Replace with your actual backend API URL for registration
@@ -29,13 +30,15 @@ export class AuthService {
     return this.http.post<any>(this.registrationUrl, registrationData);
   }
 
-  login(credentials: { username: string; password: string }) {
-    return this.http.post<{ token: string }>(this.loginUrl, credentials);
+  login(credentials: { username: string; password: string}) {
+    return this.http.post<{ token: string, steamId: string }>(this.loginUrl, credentials);
   }
 
   logout() {
     localStorage.removeItem(this.TOKEN_KEY);
     this.router.navigate(['/login']);
+    this.clearToken();
+    this.clearSteamId();
   }
 
   saveToken(token: string) {
@@ -46,9 +49,25 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
+  clearToken(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+  }
+
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(this.TOKEN_KEY);
     // Optional: Ablaufdatum prüfen, z. B. via jwt-decode
     return !!token;
+  }
+
+  saveSteamId(steamId: string): void {
+    localStorage.setItem(this.STEAM_ID_KEY, steamId);
+  }
+
+  getSteamId(): string | null {
+    return localStorage.getItem(this.STEAM_ID_KEY);
+  }
+
+  clearSteamId(): void {
+    localStorage.removeItem(this.STEAM_ID_KEY);
   }
 }

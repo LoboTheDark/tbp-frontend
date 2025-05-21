@@ -48,7 +48,9 @@ export class AuthComponent {
        this.authService.register(this.registrationForm.value).subscribe(
          response => {
            console.log('Successfully registered', response);
-           this.router.navigate(['/home']);
+           const steamId = this.registrationForm.get('steamId')?.value;
+           this.authService.saveSteamId(steamId);
+           this.router.navigate(['/home', steamId]);
          },
          error => {
            console.error('Error happend during registering', error);
@@ -72,5 +74,7 @@ export class AuthComponent {
       this.errorMessage = 'An unknown error happended. ' + this.errorMessage;
     }
   }
+
+  
 
 }
