@@ -3,5 +3,6 @@ export const environment = {
     production: true, // Indicates this is a production environment
     registerUserUrl: 'http://192.168.86.49:31002/api/auth/users/register',
     loginUrl: 'http://192.168.86.49:31002/api/auth/login',
-    homeUrl: 'http://192.168.86.49:31001/api/games/showAll'
-  };
+    showAllGamesUrl: 'http://192.168.86.49:31001/api/games/showAll'
+    
+  }; 
