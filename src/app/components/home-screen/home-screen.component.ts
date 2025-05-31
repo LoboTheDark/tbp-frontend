@@ -60,7 +60,7 @@ export class HomeScreenComponent {
        return;
     }
 
-    this.gameListService.getGames(this.steamId).subscribe({
+    this.gameListService.getGames().subscribe({
       next: (data: GameDto[]) => { // Typisierung beachten!
         this.games = data;
         this.isLoading = false;
