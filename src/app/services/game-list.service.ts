@@ -14,7 +14,7 @@ export class GameListService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getGames(steamId: string) {    
-    return this.http.get<GameDto[]>(this.allGamesUrl + "/" + steamId);
+  getGames() {    
+    return this.http.get<GameDto[]>(this.allGamesUrl);
   }
 }
