@@ -15,7 +15,7 @@
     <button mat-raised-button color="warn" (click)="loadGames()">Erneut versuchen</button>
   </div>
 
-  <div *ngIf="!isLoading && !error && games.length === 0" class="no-games">
+  <div *ngIf="!isLoading && !error && totalGames === 0" class="no-games">
     <p>Keine Spiele gefunden für Steam ID: {{ steamId }}</p>
   </div>
 
@@ -34,4 +34,14 @@
       </mat-card-actions>
     </mat-card>
   </div>
+
+  <mat-paginator *ngIf="totalGames > 0"
+    [length]="totalGames"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[20, 50]"
+    [pageIndex]="currentPage"
+    (page)="onPageChange($event)"
+    aria-label="Select page of games">
+  </mat-paginator>
+
 </div>
